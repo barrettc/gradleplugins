@@ -1,5 +1,4 @@
 apply plugin:'java'
-apply plugin:'eclipse'
 
 configurations {
 	ajc
@@ -23,33 +22,4 @@ task compileJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrite: t
 		}
 	}
 
-}
-
-//add aspectj support for eclipse plugin
-eclipseClasspath.withXml { xmlProvider ->
-	def classpath = xmlProvider.asNode()
-	def xmlparser = new XmlParser()
-
-	configurations.aspects.files.each{ aspectsLib ->
-		classpath.children().findAll{ it['@path'] == aspectsLib.absolutePath }.each {
-			def attrs = xmlparser.createNode(it, 'attributes', [:])
-			xmlparser.createNode(attrs, 'attribute', [name: 'org.eclipse.ajdt.aspectpath', value: 'true']);
-		}
-	}
-}
-
-
-eclipseProject.withXml { xmlProvider->
-	def projectDescription = xmlProvider.asNode()
-	def xmlparser = new XmlParser()
-
-	def builders = projectDescription.buildSpec[0]
-	def ajbuilder = xmlparser.createNode(builders, 'buildCommand', [:])
-	xmlparser.createNode(ajbuilder, 'name', [:]).setValue('org.eclipse.ajdt.core.ajbuilder')
-	xmlparser.createNode(ajbuilder, 'arguments', [:]);
-
-	def natures = projectDescription.natures[0]
-	def ajnature = xmlparser.createNode(null, 'nature', [:])
-	ajnature.setValue('org.eclipse.ajdt.ui.ajnature');
-	natures.children().add(0, ajnature)
 }
