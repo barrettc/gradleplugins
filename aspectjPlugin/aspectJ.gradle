@@ -11,8 +11,20 @@ task compileJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrite: t
 
 	doLast{
 		ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath)
-		ant.iajc(source:sourceCompatibility, target:targetCompatibility, destDir:sourceSets.main.output.classesDir.absolutePath, maxmem:"512m", fork:"true",
-			aspectPath:configurations.aspects.asPath, inpath:configurations.ajInpath.asPath, sourceRootCopyFilter:"**/.svn/*,**/*.java",classpath:configurations.compile.asPath){
+		ant.iajc(source:sourceCompatibility,
+				target:targetCompatibility,
+				destDir:sourceSets.main.output.classesDir.absolutePath,
+				maxmem:"512m",
+				fork:"true",
+				aspectPath:configurations.aspects.asPath,
+				inpath:configurations.ajInpath.asPath,
+				sourceRootCopyFilter:"**/.svn/*,**/*.java",
+				classpath:configurations.compile.asPath,
+				X:"noInline",
+				X:"hasMember",
+				showWeaveInfo:"true",
+				PreserveAllLocals:"true",
+				verbose:"true"){
 
 			sourceroots{
 				sourceSets.main.java.srcDirs.each{
