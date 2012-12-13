@@ -20,8 +20,7 @@ task compileJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrite: t
 				inpath:configurations.ajInpath.asPath,
 				sourceRootCopyFilter:"**/.svn/*,**/*.java",
 				classpath:configurations.compile.asPath,
-				X:"noInline",
-				X:"hasMember",
+				X:"noInline, hasMember",
 				showWeaveInfo:"true",
 				PreserveAllLocals:"true",
 				verbose:"true"){
