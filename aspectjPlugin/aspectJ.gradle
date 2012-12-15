@@ -42,7 +42,7 @@ task compileTestJava(dependsOn: JavaPlugin.PROCESS_TEST_RESOURCES_TASK_NAME, ove
 		ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath)
 		ant.iajc(source:sourceCompatibility,
 				target:targetCompatibility,
-				destDir:sourceSets.test.output.classesDir.absolutePath,
+				destDir:sourceSets.main.output.classesDir.absolutePath,
 				aspectPath:configurations.aspects.asPath,
 				inpath:configurations.ajInpath.asPath,
 				sourceRootCopyFilter:"**/.svn/*,**/*.java",
