@@ -46,7 +46,7 @@ task compileTestJava(dependsOn: JavaPlugin.PROCESS_TEST_RESOURCES_TASK_NAME, ove
 				aspectPath:configurations.aspects.asPath,
 				inpath:configurations.ajInpath.asPath,
 				sourceRootCopyFilter:"**/.svn/*,**/*.java",
-				classpath:configurations.compile.asPath,
+				classpath:configurations.testCompile.asPath,
 				X:"noInline, hasMember",
 				showWeaveInfo:"true",
 				PreserveAllLocals:"true",
