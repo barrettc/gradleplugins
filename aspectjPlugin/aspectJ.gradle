@@ -34,7 +34,7 @@ task compileJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrite: t
 
 }
 
-task compileTestJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrite: true)  {
+task compileTestJava(dependsOn: JavaPlugin.PROCESS_TEST_RESOURCES_TASK_NAME, overwrite: true)  {
 	dependsOn configurations.ajc.getTaskDependencyFromProjectDependency(true, "classes")
 	//dependsOn configurations.compile.getTaskDependencyFromProjectDependency(true, JavaPlugin.JAR_TASK_NAME)
 
