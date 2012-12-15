@@ -42,7 +42,7 @@ task compileTestJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrit
 		ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath)
 		ant.iajc(source:sourceCompatibility,
 				target:targetCompatibility,
-				destDir:testSourceSets.main.output.classesDir.absolutePath,
+				destDir:sourceSets.test.output.classesDir.absolutePath,
 				aspectPath:configurations.aspects.asPath,
 				inpath:configurations.ajInpath.asPath,
 				sourceRootCopyFilter:"**/.svn/*,**/*.java",
@@ -53,7 +53,7 @@ task compileTestJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrit
 				verbose:"true"){
 
 			sourceroots{
-				testSourceSets.main.java.srcDirs.each{
+				sourceSets.test.java.srcDirs.each{
 					pathelement(location:it.absolutePath)
 				}
 			}
