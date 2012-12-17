@@ -17,7 +17,7 @@ task compileJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrite: t
 				destDir:sourceSets.main.output.classesDir.absolutePath,
 				aspectPath:configurations.aspects.asPath,
 				inpath:configurations.ajInpath.asPath,
-				sourceRootCopyFilter:"**/.svn/*,**/*.java",
+				sourceRootCopyFilter:"**/*.java",
 				classpath:configurations.compile.asPath,
 				X:"noInline, hasMember",
 				showWeaveInfo:"true",
