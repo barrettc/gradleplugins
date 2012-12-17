@@ -33,31 +33,3 @@ task compileJava(dependsOn: JavaPlugin.PROCESS_RESOURCES_TASK_NAME, overwrite: t
 	}
 
 }
-
-task compileTestJava(dependsOn: JavaPlugin.PROCESS_TEST_RESOURCES_TASK_NAME, overwrite: true)  {
-	dependsOn configurations.ajc.getTaskDependencyFromProjectDependency(true, "classes")
-	//dependsOn configurations.compile.getTaskDependencyFromProjectDependency(true, JavaPlugin.JAR_TASK_NAME)
-
-	doLast{
-		ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath)
-		ant.iajc(source:sourceCompatibility,
-				target:targetCompatibility,
-				destDir:sourceSets.main.output.classesDir.absolutePath,
-				aspectPath:configurations.aspects.asPath,
-				inpath:configurations.ajInpath.asPath,
-				sourceRootCopyFilter:"**/.svn/*,**/*.java",
-				classpath:configurations.testCompile.asPath,
-				X:"noInline, hasMember",
-				showWeaveInfo:"true",
-				PreserveAllLocals:"true",
-				verbose:"true"){
-
-			sourceroots{
-				sourceSets.test.java.srcDirs.each{
-					pathelement(location:it.absolutePath)
-				}
-			}
-		}
-	}
-
-}
